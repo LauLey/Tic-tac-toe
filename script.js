@@ -1,19 +1,16 @@
-gameBoard {
-    const tablero = [null, null, null, null, null, null, null, null, null];
+const gameBoard = (() => {
+    const board = [null, null, null, null, null, null, null, null, null];
 
-    function placeMark (position, symbol) {
-        if (tablero[position]===null) {
-            tablero[position]=symbol;
+    const placeMark = (position, symbol) => {
+        if (board[position] === null) {
+            board[position] = symbol;
         }
 
         else {
             return "ERROR: Elige una casilla vacía";
-            }
-    }
-}
+        }
+    };
 
+    return { placeMark };
+})();
 
-
-playgame ({
-
-})()
