@@ -4,6 +4,7 @@ const gameBoard = (() => {
     const placeMark = (position, symbol) => {
         if (board[position] === null) {
             board[position] = symbol;
+            return true;
         }
 
         else {
