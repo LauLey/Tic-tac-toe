@@ -29,3 +29,55 @@ const gameBoard = (() => {
 
         return { placeMark, winner };
 })();
+
+
+const gameController = (() => {
+const players = [];
+let symbol = "";
+function createPlayers() {
+
+if (players.length === 2) {
+alert("Jugadores completos");
+return;
+}
+
+else if (players.length=== 1) {
+if (players[0].symbol==="X") {
+symbol = "O"
+}
+else symbol = "X"
+}
+
+const name = prompt("Escribe tu nombre");
+
+if (!name || !name.trim()) {
+alert("Nombre inválido");
+return;
+}
+
+const cleanName = name.trim();
+
+alert("Hola, " + cleanName + ". ¡Bienvenido!");
+
+if (symbol==="") {
+while ((symbol!=="O") && (symbol!=="X")){
+symbol = prompt("Elige tu marca de juego: X|O")
+if (!symbol) {
+alert  ("No elegiste símbolo, creación de jugador cancelada")
+return
+}
+else {
+symbol= symbol.toUpperCase()
+}
+}
+}
+
+const numPlayer = players.length +1
+const player = { numPlayer, name: cleanName, symbol };
+
+players.push(player)
+
+return player;
+}
+return {createPlayers}
+})();
