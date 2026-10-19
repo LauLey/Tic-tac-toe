@@ -8,7 +8,7 @@ const gameBoard = (() => {
         }
 
         else {
-            return "ERROR: Elige una casilla vacía";
+            return false;
         }
     };
 
@@ -28,13 +28,16 @@ const gameBoard = (() => {
             return playerWinner;
         }
 
-        return { placeMark, winner };
+        const getMark = (position) => board[position];
+
+        return { placeMark, winner, getMark};
 })();
 
 
 const gameController = (() => {
 const players = [];
 let symbol = "";
+let currentPlayerIndex = 0;
 function createPlayers() {
 
 if (players.length === 2) {
@@ -80,5 +83,27 @@ players.push(player)
 
 return player;
 }
-return {createPlayers}
+
+function playTurn (position) {
+    if (players.length < 2) {
+    alert("Primero debes crear los dos jugadores");
+    return;
+    }
+    if (currentPlayerIndex===0) {
+        const validMove = gameBoard.placeMark(position, players[currentPlayerIndex].symbol);
+        if (validMove===true) {
+            currentPlayerIndex ++
+        }
+    }
+    else { 
+        const validMove = gameBoard.placeMark(position, players[currentPlayerIndex].symbol);
+        if (validMove===true) {
+            currentPlayerIndex --
+        }
+    }
+
+}
+
+return {createPlayers, playTurn}
 })();
+
