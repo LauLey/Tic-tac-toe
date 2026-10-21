@@ -29,8 +29,9 @@ const gameBoard = (() => {
         }
 
         const getMark = (position) => board[position];
+        const isDraw = () => board.every(position => position !== null);
 
-        return { placeMark, winner, getMark};
+        return { placeMark, winner, getMark, isDraw};
 })();
 
 
@@ -103,6 +104,11 @@ function playTurn (position) {
                 gameOver = true;
                 alert (`Ganador del juego: ${nameWinner}`);
             }
+            else if (gameBoard.isDraw()) {
+                alert ("Es un empate");
+                gameOver = true;
+                return
+            }            
             else currentPlayerIndex ++
         }
     }
@@ -116,6 +122,11 @@ function playTurn (position) {
                 gameOver = true;
                 alert (`Ganador del juego: ${nameWinner}`);
             }
+            else if (gameBoard.isDraw()) {
+                alert ("Es un empate");
+                gameOver = true;
+                return
+            }       
             else currentPlayerIndex --
         }
     }
