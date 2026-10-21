@@ -38,6 +38,7 @@ const gameController = (() => {
 const players = [];
 let symbol = "";
 let currentPlayerIndex = 0;
+let gameOver = false;
 function createPlayers() {
 
 if (players.length === 2) {
@@ -85,20 +86,33 @@ return player;
 }
 
 function playTurn (position) {
-    if (players.length < 2) {
+    if (gameOver===true) {
+        return
+    }
+    else if (players.length < 2) {
     alert("Primero debes crear los dos jugadores");
     return;
     }
-    if (currentPlayerIndex===0) {
+    else if (currentPlayerIndex===0) {
         const validMove = gameBoard.placeMark(position, players[currentPlayerIndex].symbol);
         if (validMove===true) {
-            currentPlayerIndex ++
+            const playerWinner = gameBoard.winner();
+            if (playerWinner !== ""){
+                gameOver = true;
+                alert (`Ganador del juego: ${playerWinner}`);
+            }
+            else currentPlayerIndex ++
         }
     }
     else { 
         const validMove = gameBoard.placeMark(position, players[currentPlayerIndex].symbol);
         if (validMove===true) {
-            currentPlayerIndex --
+            const playerWinner = gameBoard.winner();
+            if (playerWinner !== ""){
+                gameOver = true;
+                alert (`Ganador del juego: ${playerWinner}`);
+            }
+            else currentPlayerIndex --
         }
     }
 
