@@ -98,8 +98,10 @@ function playTurn (position) {
         if (validMove===true) {
             const playerWinner = gameBoard.winner();
             if (playerWinner !== ""){
+                const nameWinnerObject = players.find(p => p.symbol === playerWinner);
+                const nameWinner = nameWinnerObject.name;
                 gameOver = true;
-                alert (`Ganador del juego: ${playerWinner}`);
+                alert (`Ganador del juego: ${nameWinner}`);
             }
             else currentPlayerIndex ++
         }
@@ -109,8 +111,10 @@ function playTurn (position) {
         if (validMove===true) {
             const playerWinner = gameBoard.winner();
             if (playerWinner !== ""){
+                const nameWinnerObject = players.find(p => p.symbol === playerWinner);
+                const nameWinner = nameWinnerObject.name;
                 gameOver = true;
-                alert (`Ganador del juego: ${playerWinner}`);
+                alert (`Ganador del juego: ${nameWinner}`);
             }
             else currentPlayerIndex --
         }
