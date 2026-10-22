@@ -30,8 +30,9 @@ const gameBoard = (() => {
 
         const getMark = (position) => board[position];
         const isDraw = () => board.every(position => position !== null);
+        const resetBoard = () => board.fill(null);
 
-        return { placeMark, winner, getMark, isDraw};
+        return { placeMark, winner, getMark, isDraw, resetBoard};
 })();
 
 
@@ -132,7 +133,14 @@ function playTurn (position) {
     }
 
 }
+const resetController = () => {
+    gameBoard.resetBoard();
+    players.length = 0;
+    symbol = "";
+    currentPlayerIndex = 0;
+    gameOver = false;
+}
 
-return {createPlayers, playTurn}
+return {createPlayers, playTurn, resetController}
 })();
 
