@@ -88,6 +88,7 @@ return player;
 }
 
 function playTurn (position) {
+    let validMove = false;
     if (gameOver===true) {
         return
     }
@@ -96,7 +97,7 @@ function playTurn (position) {
     return;
     }
     else if (currentPlayerIndex===0) {
-        const validMove = gameBoard.placeMark(position, players[currentPlayerIndex].symbol);
+        validMove = gameBoard.placeMark(position, players[currentPlayerIndex].symbol);
         if (validMove===true) {
             const playerWinner = gameBoard.winner();
             if (playerWinner !== ""){
@@ -114,7 +115,7 @@ function playTurn (position) {
         }
     }
     else { 
-        const validMove = gameBoard.placeMark(position, players[currentPlayerIndex].symbol);
+        validMove = gameBoard.placeMark(position, players[currentPlayerIndex].symbol);
         if (validMove===true) {
             const playerWinner = gameBoard.winner();
             if (playerWinner !== ""){
@@ -132,6 +133,8 @@ function playTurn (position) {
         }
     }
 
+    return validMove;
+
 }
 const resetController = () => {
     gameBoard.resetBoard();
@@ -141,7 +144,11 @@ const resetController = () => {
     gameOver = false;
 }
 
-return {createPlayers, playTurn, resetController}
+const getCurrentSymbol = () => {
+    return players[currentPlayerIndex].symbol;
+}
+
+return {createPlayers, playTurn, resetController, getCurrentSymbol}
 })();
 
 const resetButton = document.querySelector("#reset");
@@ -155,4 +162,17 @@ resetButton.addEventListener("click", () => {
 
 createButton.addEventListener("click", () => {
     gameController.createPlayers();
+})
+
+board.addEventListener("click", (e) => {
+    const p = document.createElement("p");
+    p.textContent = gameController.getCurrentSymbol();
+    const squareId = parseInt(e.target.id);
+    let queryMark = gameController.playTurn(squareId);
+        if (queryMark===true) {
+            e.target.appendChild(p);
+        }
+        else return
+    
+
 })
