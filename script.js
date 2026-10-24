@@ -144,3 +144,15 @@ const resetController = () => {
 return {createPlayers, playTurn, resetController}
 })();
 
+const resetButton = document.querySelector("#reset");
+const board = document.querySelector("#board");
+const createButton = document.querySelector("#createPlayers");
+const turn = document.querySelector("#turn");
+
+resetButton.addEventListener("click", () => {
+    gameController.resetController()
+})
+
+createButton.addEventListener("click", () => {
+    gameController.createPlayers();
+})
