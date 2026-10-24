@@ -1,0 +1,144 @@
+/* CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Colores principales */
+    --color-background: #f3f5fb;
+    --color-surface: #ffffff;
+    --color-primary: #7774e8;
+    --color-primary-dark: #5b58c7;
+    --color-secondary: #f5a0bd;
+    --color-text: #24243a;
+    --color-text-muted: #77788c;
+    --color-border: #e3e5f0;
+
+    /* Tablero */
+    --color-board: #ffffff;
+    --color-x: #7774e8;
+    --color-o: #f5a0bd;
+
+    /* Estados */
+    --color-turn: #e9e8ff;
+    --color-hover: #f0efff;
+}
+
+body {
+    background-color: var(--color-background);
+    width: 100%;
+    font-family: "Nunito", sans-serif;
+}
+
+.content {
+    width: 80%;
+    height: 100vh;
+    margin: auto;
+    background-color: var(--color-surface);
+    border: solid 1px var(--color-border);
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    flex: 2 1 0%;
+    text-align: center;
+}
+.players {
+    display: flex;
+    justify-content: space-around;
+    flex: 2 1 0%;
+    width: 100%;
+}
+
+.player {
+    background-color: var(--color-surface);
+    border: solid var(--color-border) 2px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    
+}
+
+.player p {
+    flex-grow: 2;
+}
+
+.symbol {
+    flex-grow: 1;
+}
+
+.turn {
+    flex: 1 1 0%;
+    background-color: var(--color-turn);
+}
+
+.buttons {
+    flex-grow: 3;
+    display: flex;
+    gap: 20px;
+}
+
+button {
+    background-color: var(--color-primary);
+    flex-grow: 1;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: var(--color-primary-dark);
+}
+
+h1 {
+    color: var(--color-text);
+}
+
+h2 {
+    color: var(--color-text-muted);
+}
+
+.board {
+    background-color: var(--color-board);
+    width: min(80%, 60vh);
+    aspect-ratio: 1;
+    margin: auto;
+    flex: 0 1 auto;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+.square {
+    border: solid var(--color-border) 1px;
+}
+
+.square:hover {
+    background-color: var(--color-hover);
+}
+
+.symbolX {
+    color: var(--color-x);
+}
+
+.symbolO {
+    color: var(--color-o);
+}
+
+footer {
+    flex: 2 1 0%;
+    display: flex;
+    flex-direction: column;
+}
+
+.author {
+    flex-grow: 1;
+    text-align: center;
+}
+
+
+
