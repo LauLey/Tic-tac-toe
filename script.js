@@ -166,7 +166,30 @@ resetButton.addEventListener("click", () => {
 })
 
 createButton.addEventListener("click", () => {
-    gameController.createPlayers();
+    const player1 = document.querySelector(".player1");
+    const symbol1 = document.querySelector(".symbol1");
+    const player2 = document.querySelector(".player2");
+    const symbol2 = document.querySelector(".symbol2");
+    const pName1 = document.createElement("p");
+    const pName2 = document.createElement("p");
+    const pSymbol1 = document.createElement("p");
+    const pSymbol2 = document.createElement("p");
+    const player = gameController.createPlayers("p");
+        if (player.numPlayer===1) {
+            pName1.textContent = player.name;
+            pName1.classList.add("player1");
+            player1.appendChild(pName1);
+            pSymbol1.textContent = player.symbol;
+            symbol1.appendChild(pSymbol1);
+        }
+        else {
+            pName2.textContent = player.name;
+            pName2.classList.add("player2");
+            player2.appendChild(pName2);
+            pSymbol2.textContent = player.symbol;
+            symbol2.appendChild(pSymbol2);
+        }
+
 })
 
 board.addEventListener("click", (e) => {
