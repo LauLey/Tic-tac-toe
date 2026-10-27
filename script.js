@@ -8,6 +8,7 @@ const gameBoard = (() => {
         }
 
         else {
+            alert ("Elige una casilla vacía")
             return false;
         }
     };
@@ -101,15 +102,12 @@ function playTurn (position) {
         if (validMove===true) {
             const playerWinner = gameBoard.winner();
             if (playerWinner !== ""){
-                const nameWinnerObject = players.find(p => p.symbol === playerWinner);
-                const nameWinner = nameWinnerObject.name;
                 gameOver = true;
-                alert (`Ganador del juego: ${nameWinner}`);
+                return playerWinner;
             }
             else if (gameBoard.isDraw()) {
-                alert ("Es un empate");
                 gameOver = true;
-                return
+                return "isDraw";
             }            
             else currentPlayerIndex ++
         }
@@ -119,15 +117,12 @@ function playTurn (position) {
         if (validMove===true) {
             const playerWinner = gameBoard.winner();
             if (playerWinner !== ""){
-                const nameWinnerObject = players.find(p => p.symbol === playerWinner);
-                const nameWinner = nameWinnerObject.name;
                 gameOver = true;
-                alert (`Ganador del juego: ${nameWinner}`);
+                return playerWinner;
             }
             else if (gameBoard.isDraw()) {
-                alert ("Es un empate");
                 gameOver = true;
-                return
+                return "isDraw";
             }       
             else currentPlayerIndex --
         }
@@ -148,7 +143,13 @@ const getCurrentSymbol = () => {
     return players[currentPlayerIndex].symbol;
 }
 
-return {createPlayers, playTurn, resetController, getCurrentSymbol}
+const nameWinner = (symbol) => {
+const nameWinnerObject =players.find(p => p.symbol === symbol);
+const winnerName = nameWinnerObject.name;
+return winnerName;
+}
+
+return {createPlayers, playTurn, resetController, getCurrentSymbol, nameWinner}
 })();
 
 const resetButton = document.querySelector("#reset");
@@ -157,7 +158,8 @@ const createButton = document.querySelector("#createPlayers");
 const turn = document.querySelector("#turn");
 
 resetButton.addEventListener("click", () => {
-    gameController.resetController()
+    gameController.resetController();
+    
 })
 
 createButton.addEventListener("click", () => {
@@ -167,12 +169,33 @@ createButton.addEventListener("click", () => {
 board.addEventListener("click", (e) => {
     const p = document.createElement("p");
     p.textContent = gameController.getCurrentSymbol();
-    const squareId = parseInt(e.target.id);
-    let queryMark = gameController.playTurn(squareId);
-        if (queryMark===true) {
-            e.target.appendChild(p);
+    p.classList.add("mark");
+        if (p.textContent==="X") {
+            p.classList.add("symbolX");
         }
+        else p.classList.add("symbolO");
+    const square = (e.target.closest(".square"));
+    const squareId = parseInt(square.id);
+    let queryMark = gameController.playTurn(squareId);
+    console.log("Resultado de playTurn:", queryMark);
+        if (queryMark===true) {
+            square.appendChild(p);
+        }
+        else if (queryMark==="X" || queryMark==="O") {
+            square.appendChild(p);
+            setTimeout(() => {
+            alert(gameController.nameWinner(queryMark));
+            }, 0);
+        }
+
+        else if (queryMark==="isDraw") {
+            square.appendChild(p);
+            setTimeout(() => {
+            alert("Es un empate");
+            }, 0);
+        }
+        
+
         else return
-    
 
 })
