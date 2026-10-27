@@ -159,7 +159,10 @@ const turn = document.querySelector("#turn");
 
 resetButton.addEventListener("click", () => {
     gameController.resetController();
-    
+    const marks = board.querySelectorAll(".mark");
+    marks.forEach(mark => {
+        mark.remove();
+    })
 })
 
 createButton.addEventListener("click", () => {
