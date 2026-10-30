@@ -156,6 +156,7 @@ const resetButton = document.querySelector("#reset");
 const board = document.querySelector("#board");
 const createButton = document.querySelector("#createPlayers");
 const turn = document.querySelector("#turn");
+const players = document.querySelector(".players");
 
 resetButton.addEventListener("click", () => {
     gameController.resetController();
@@ -163,6 +164,11 @@ resetButton.addEventListener("click", () => {
     marks.forEach(mark => {
         mark.remove();
     })
+
+    const pP = players.querySelectorAll(".player1 p, .player2 p, .symbol1 p, .symbol2 p");
+        pP.forEach(p => {
+            p.remove();
+        })
 })
 
 createButton.addEventListener("click", () => {
@@ -210,7 +216,7 @@ board.addEventListener("click", (e) => {
         else if (queryMark==="X" || queryMark==="O") {
             square.appendChild(p);
             setTimeout(() => {
-            alert(gameController.nameWinner(queryMark));
+            alert("Ganador es " + gameController.nameWinner(queryMark));
             }, 0);
         }
 
